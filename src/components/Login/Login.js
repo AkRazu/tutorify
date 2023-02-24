@@ -3,16 +3,31 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import girlBg from "../../assets/Girl/bg-login.png";
 import { FaGoogle } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../Firebase/firebase";
 const Login = () => {
+  const navigate = useNavigate();
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    signInWithEmailAndPassword(data.email, data.password);
+    toast.success("Login successful");
+  };
+  if (user) {
+    navigate("/");
+  }
   return (
     <div>
+        <ToastContainer />
       <div className="hero min-h-screen bg-base-100">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
@@ -51,11 +66,19 @@ const Login = () => {
                   {errors.password && (
                     <p className="mt-2 text-red-600">Password is required</p>
                   )}
+                {
+                    error?.message ? <p className="mt-2 text-red-600">{error.message}</p> : ''
+                }
                   <label className="label">
-                    <a href="#" className="label-text-alt link link-hover">
+                    <Link to='/' className="label-text-alt link link-hover">
                       Forgot password?
-                    </a>
+                    </Link>
                   </label>
+                  {loading ? (
+                    <progress className="progress w-56 mx-auto"></progress>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn btn-primary">Login</button>
@@ -69,10 +92,16 @@ const Login = () => {
             </span>
             <div className="card-body">
               <button className="btn">
-                <FaGoogle className="mr-5" />Login with Google{" "}
+                <FaGoogle className="mr-5" />
+                Login with Google{" "}
               </button>
 
-              <p className="text-center my-2">Don't have and account? <Link className="text-primary" to='/signup'>Sign up</Link> </p>
+              <p className="text-center my-2">
+                Don't have and account?{" "}
+                <Link className="text-primary" to="/signup">
+                  Sign up
+                </Link>{" "}
+              </p>
             </div>
           </div>
         </div>
