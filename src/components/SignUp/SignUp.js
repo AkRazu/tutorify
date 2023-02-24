@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import girlBg from "../../assets/Girl/bg-login.png";
 import { FaGoogle } from "react-icons/fa";
-const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
-  return (
-    <div>
-      <div className="hero min-h-screen bg-base-100">
+const SignUp = () => {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+      } = useForm();
+      const onSubmit = (data) => console.log(data);
+    return (
+        <div>
+             <div className="hero min-h-screen bg-base-100">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
             <img className="lg:w-1/2 w-auto m-auto" src={girlBg} alt="girl" />
@@ -77,8 +77,8 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+        </div>
+    );
 };
 
-export default Login;
+export default SignUp;
