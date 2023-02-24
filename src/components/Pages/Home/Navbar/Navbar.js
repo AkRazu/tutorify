@@ -9,7 +9,8 @@ const Navbar = ({ children }) => {
   const auth = getAuth(app);
   const [user] = useAuthState(auth);
   const [signOut, loading, error] = useSignOut(auth);
-  console.log(user);
+  
+  localStorage.setItem('token',user?.accessToken)
   return (
     <div data-theme={dark ? "dark" : "light"}>
       <div className="navbar bg-base-100 w-9/12 border-b-2 mx-auto">

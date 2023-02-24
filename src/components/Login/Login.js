@@ -1,35 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link,useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import girlBg from "../../assets/Girl/bg-login.png";
 import { FaGoogle } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import auth from "../../Firebase/firebase";
 import { getAuth } from "firebase/auth";
 import app from "../../Firebase/firebase";
 const Login = () => {
   const auth = getAuth(app);
+  let location = useLocation();
   const navigate = useNavigate();
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle,user2, loading2, error2] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, user2, loading2, error2] = useSignInWithGoogle(auth);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
+  let from = location.state?.from?.pathname || "/";
+
   const onSubmit = (data) => {
     console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
     toast.success("Login successful");
+    navigate(from, { replace: true });
   };
 
   if (user) {
     navigate("/");
+    console.log(user);
   }
+  
   if (user2) {
     navigate("/");
   }
@@ -112,7 +122,7 @@ const Login = () => {
               <hr className="w-1/3 border-1 border-gray-300 mx-2" />
             </span>
             <div className="card-body">
-              <button onClick={()=>signInWithGoogle()} className="btn">
+              <button onClick={() => signInWithGoogle()} className="btn">
                 <FaGoogle className="mr-5" />
                 Login with Google{" "}
               </button>

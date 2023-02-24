@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import girlBg from "../../assets/Girl/bg-login.png";
 import { FaGoogle } from "react-icons/fa";
@@ -25,6 +25,7 @@ const SignUp = () => {
     console.log(data.email);
     createUserWithEmailAndPassword(data.email, data.password);
     toast.success("Sign up successful");
+    
   };
   if (user) {
     navigate("/");
