@@ -1,7 +1,15 @@
+import { getAuth } from "firebase/auth";
 import React, { useState } from "react";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import app from "../../../../Firebase/firebase";
+import auth from "../../../../Firebase/firebase";
 const Navbar = ({ children }) => {
   const [dark, setDark] = useState(false);
+  const auth = getAuth(app);
+  const [user] = useAuthState(auth);
+  const [signOut, loading, error] = useSignOut(auth);
+  console.log(user);
   return (
     <div data-theme={dark ? "dark" : "light"}>
       <div className="navbar bg-base-100 w-9/12 border-b-2 mx-auto">
@@ -39,30 +47,44 @@ const Navbar = ({ children }) => {
               <li>
                 <Link to="/aboutUs">About Us</Link>
               </li>
-              <li className="pt-2 lg:hidden block">
-                <Link className="btn btn-sm" to="/">Login</Link>
+              {
+                user ? <li className="pt-2 lg:hidden block">
+                <Link onClick={()=>signOut()} className="btn btn-sm text-white" to="/login">
+                  Logout
+                </Link>
+              </li> : <span>
+                  <li className="pt-2 lg:hidden block">
+                <Link className="btn btn-sm text-white" to="/login">
+                  Login
+                </Link>
               </li>
               <li className="pt-2 lg:hidden block">
-              <Link className="btn btn-sm" to="/">Sign up</Link>
+                <Link className="btn btn-sm text-white" to="/signup">
+                  Sign up
+                </Link>
               </li>
+                </span>
+              }
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl">Tutorify</Link>
+          <Link to="/" className="btn btn-ghost normal-case text-xl">
+            Tutorify
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-          <li>
-                <Link to="/">Home </Link>
-              </li>
-              <li>
-                <Link to="/lessons">Lessons</Link>
-              </li>
-              <li>
-                <Link to="/tutor">Find Tutors</Link>
-              </li>
-              <li>
-                <Link to="/aboutUs">About Us</Link>
-              </li>
+            <li>
+              <Link to="/">Home </Link>
+            </li>
+            <li>
+              <Link to="/lessons">Lessons</Link>
+            </li>
+            <li>
+              <Link to="/tutor">Find Tutors</Link>
+            </li>
+            <li>
+              <Link to="/aboutUs">About Us</Link>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">
@@ -83,12 +105,34 @@ const Navbar = ({ children }) => {
               <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
             </svg>
           </label>
-          <label className="lg:block hidden">
-          <Link to='/login' className="btn btn-primary btn-sm mx-5 text-white">Login</Link>
-          </label>
-          <label className=" lg:block hidden">
-          <Link to='/signup' className="btn btn-secondary btn-sm  text-white">Sign up</Link>
-          </label>
+          {
+            user ? <label className="lg:block hidden">
+            <Link 
+              to="/login"
+              onClick={()=>signOut()}
+              className="btn btn-primary btn-sm mx-5 text-white"
+            >
+              Logout
+            </Link>
+          </label> : <span className="flex">
+            <label className="lg:block hidden">
+              <Link
+                to="/login"
+                className="btn btn-primary btn-sm mx-5 text-white"
+              >
+                Login
+              </Link>
+            </label>
+            <label className=" lg:block hidden">
+              <Link
+                to="/signup"
+                className="btn btn-secondary btn-sm  text-white"
+              >
+                Sign up
+              </Link>
+            </label>
+          </span>
+          }
           
         </div>
       </div>

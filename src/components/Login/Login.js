@@ -5,12 +5,16 @@ import girlBg from "../../assets/Girl/bg-login.png";
 import { FaGoogle } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../Firebase/firebase";
+import { getAuth } from "firebase/auth";
+import app from "../../Firebase/firebase";
 const Login = () => {
+  const auth = getAuth(app);
   const navigate = useNavigate();
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle,user2, loading2, error2] = useSignInWithGoogle(auth);
   const {
     register,
     handleSubmit,
@@ -22,12 +26,17 @@ const Login = () => {
     signInWithEmailAndPassword(data.email, data.password);
     toast.success("Login successful");
   };
+
   if (user) {
+    navigate("/");
+  }
+  if (user2) {
     navigate("/");
   }
   return (
     <div>
-        <ToastContainer />
+      <ToastContainer />
+
       <div className="hero min-h-screen bg-base-100">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
@@ -66,15 +75,27 @@ const Login = () => {
                   {errors.password && (
                     <p className="mt-2 text-red-600">Password is required</p>
                   )}
-                {
-                    error?.message ? <p className="mt-2 text-red-600">{error.message}</p> : ''
-                }
+                  {error?.message ? (
+                    <p className="mt-2 text-red-600">{error.message}</p>
+                  ) : (
+                    ""
+                  )}
+                  {error2?.message ? (
+                    <p className="mt-2 text-red-600">{error2.message}</p>
+                  ) : (
+                    ""
+                  )}
                   <label className="label">
-                    <Link to='/' className="label-text-alt link link-hover">
+                    <Link to="/" className="label-text-alt link link-hover">
                       Forgot password?
                     </Link>
                   </label>
                   {loading ? (
+                    <progress className="progress w-56 mx-auto"></progress>
+                  ) : (
+                    ""
+                  )}
+                  {loading2 ? (
                     <progress className="progress w-56 mx-auto"></progress>
                   ) : (
                     ""
@@ -91,7 +112,7 @@ const Login = () => {
               <hr className="w-1/3 border-1 border-gray-300 mx-2" />
             </span>
             <div className="card-body">
-              <button className="btn">
+              <button onClick={()=>signInWithGoogle()} className="btn">
                 <FaGoogle className="mr-5" />
                 Login with Google{" "}
               </button>

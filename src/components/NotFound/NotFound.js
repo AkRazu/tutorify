@@ -5,7 +5,7 @@ const NotFound = () => {
     <div className="flex items-center justify-center min-h-screen">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body text-center">
-          <h2 className="text-4xl font-semibold">Oh no!</h2>
+          <h2 className="text-4xl font-semibold">Oh no! 404</h2>
           <p>
             We're usually a treasure chest of knowledge, but we could't find
             what you're looking for.
