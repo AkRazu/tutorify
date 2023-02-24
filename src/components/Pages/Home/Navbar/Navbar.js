@@ -31,13 +31,13 @@ const Navbar = ({ children }) => {
                 <Link to="/">Home </Link>
               </li>
               <li>
-                <Link to="/">Lessons</Link>
+                <Link to="/lessons">Lessons</Link>
               </li>
               <li>
-                <Link to="/">Find Tutors</Link>
+                <Link to="/tutor">Find Tutors</Link>
               </li>
               <li>
-                <Link to="/">About Us</Link>
+                <Link to="/aboutUs">About Us</Link>
               </li>
               <li className="pt-2 lg:hidden block">
                 <Link className="btn btn-sm" to="/">Login</Link>
@@ -51,18 +51,18 @@ const Navbar = ({ children }) => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link to="/">Home </Link>
-            </li>
-            <li>
-              <Link to="/">Lessons</Link>
-            </li>
-            <li>
-              <Link to="/">Find Tutors</Link>
-            </li>
-            <li>
-              <Link to="/">About Us</Link>
-            </li>
+          <li>
+                <Link to="/">Home </Link>
+              </li>
+              <li>
+                <Link to="/lessons">Lessons</Link>
+              </li>
+              <li>
+                <Link to="/tutor">Find Tutors</Link>
+              </li>
+              <li>
+                <Link to="/aboutUs">About Us</Link>
+              </li>
           </ul>
         </div>
         <div className="navbar-end">
@@ -84,10 +84,10 @@ const Navbar = ({ children }) => {
             </svg>
           </label>
           <label className="lg:block hidden">
-          <Link to='/' className="btn btn-sm mx-5 text-white">Login</Link>
+          <Link to='/login' className="btn btn-primary btn-sm mx-5 text-white">Login</Link>
           </label>
           <label className=" lg:block hidden">
-          <Link to='/' className="btn btn-sm  text-white">Sign up</Link>
+          <Link to='/signup' className="btn btn-secondary btn-sm  text-white">Sign up</Link>
           </label>
           
         </div>

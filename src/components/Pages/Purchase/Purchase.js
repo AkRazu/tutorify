@@ -18,7 +18,7 @@ const Purchase = () => {
       </div>
       <div className="hero bg-base-100 mt-10">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <img src={boy} className="max-w-sm rounded-lg" alt="Man" />
+          <img src={boy} className="lg:max-w-sm w-auto rounded-lg" alt="Man" />
           <div>
             <h1 className="text-4xl font-semibold">
               Purchase your awesome <br /> lessons and find your tutors{" "}
@@ -29,8 +29,8 @@ const Purchase = () => {
               habitant a tincidunt cras accumsan integer suscipit. Libero
               accumsan eget aliquet.
             </p>
-            <button className="btn btn-primary border-0 text-white bg-[#FB9C46]">Book Your Lessons</button>
-            <button className="btn ml-2 text-[#FB9C46] btn-outline border-[#FB9C46]">Book Your Lessons</button>
+            <button className="btn btn-secondary border-0 text-white ">Book Your Lessons</button>
+            <button className="btn lg:ml-2 mt-2 text-[#FB9C46] btn-outline">Book Your Lessons</button>
           </div>
         </div>
       </div>

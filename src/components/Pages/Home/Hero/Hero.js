@@ -26,7 +26,7 @@ const Hero = () => {
               src={Flag1}
               alt="flag"
             />
-            <img src={Man} alt="man" className="max-w-sm   rounded-lg z-40" />
+            <img src={Man} alt="man" className="lg:max-w-sm   rounded-lg z-40" />
           </div>
           <div>
             <span className="flex items-center">
@@ -44,7 +44,7 @@ const Hero = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Id
               interdum dui mollis . Suspendisse nulla :
             </p>
-            <button className="btn btn-primary text-white border-0 bg-[#058E6E]">Try Free Lessons</button>
+            <button className="btn btn-primary text-white">Try Free Lessons</button>
           </div>
         </div>
       </div>

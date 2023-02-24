@@ -1,4 +1,5 @@
 import React from "react";
+import Get from "../../Get/Get";
 import Purchase from "../../Purchase/Purchase";
 import Hero from "../Hero/Hero";
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <Hero/>
       <Purchase/>
+      <Get/>
     </div>
   );
 };

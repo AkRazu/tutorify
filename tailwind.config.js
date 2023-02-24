@@ -7,7 +7,7 @@ module.exports = {
         dark: {
           primary: "#661AE6",
 
-          secondary: "#D926AA",
+          secondary: "#f6d860",
 
           accent: "#1FB2A5",
 
@@ -24,9 +24,9 @@ module.exports = {
           error: "#F87272",
         },
         light: {
-          primary: "#570DF8",
+          primary: "#407F55",
 
-          secondary: "#F000B8",
+          secondary: "#FB9C46",
 
           accent: "#37CDBE",
 
