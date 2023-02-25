@@ -6,6 +6,8 @@ import NotFound from "../components/NotFound/NotFound";
 import Login from "../components/Login/Login";
 import SignUp from "../components/SignUp/SignUp";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import Courses from "../components/Pages/Courses/Courses";
+import Get from "../components/Pages/Get/Get";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,16 +22,24 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "/get",
+        element: <Get/>,
+      },
+      {
         path: "/signup",
         element: <SignUp />,
       },
       {
-        path: "*",
+        path: "/courses",
         element: (
           <PrivateRoute>
-            <NotFound />
+            <Courses />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

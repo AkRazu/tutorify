@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth";
-import React from "react";
+import React, { useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   Routes,
@@ -10,19 +10,23 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
+import { AuthProvider } from "../../Context/AuthContext";
 import app from "../../Firebase/firebase";
 
 const PrivateRoute = ({ children }) => {
-  const auth = getAuth(app);
-  const [user] = useAuthState(auth);
-  console.log(user?.uid);
+  const {loading,user}= useContext(AuthProvider);
+  
   let location = useLocation();
-  console.log(localStorage?.getItem("token"));
-  if (localStorage?.getItem("token")) {
+
+  if(loading){
+    return <p>Loading...</p>
+  }
+  if (user) {
     return children;
   }
-
   return <Navigate to="/login" state={{ from: location }} replace />;
+  
+  
 };
 
 export default PrivateRoute;
